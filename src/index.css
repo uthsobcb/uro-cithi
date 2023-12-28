@@ -41,11 +41,10 @@ span {
 }
 
 textarea {
-  width: 50%;
+  width: 67%;
   padding: 20px;
   font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 15px;
   resize: vertical;
   align-items: center;
   background-color: black;
@@ -79,24 +78,29 @@ button:focus-visible {
 
 .card-section {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 .card-container {
-  border: 1px solid wheat;
-  width: 350px;
-  border-radius: 20px;
-  text-align: center;
-  background: #093028;
-  background: -webkit-linear-gradient(to right, #237A57, #093028);
-  background: linear-gradient(to right, #237A57, #093028);
+  background: linear-gradient(to right, #2c3e50, #34495e);
+  border: 1px solid #2c3e50;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
-.card-container h3 {
-  color: yellow;
+.card-container:hover {
+  transform: scale(1.05);
 }
 
+h3 {
+  color: #ecf0f1;
+}
 @media only screen and (max-width: 720px) {
   .card-section {
     display: flex;
