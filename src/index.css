@@ -97,21 +97,6 @@ button:focus-visible {
   color: yellow;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 @media only screen and (max-width: 720px) {
   .card-section {
     display: flex;
