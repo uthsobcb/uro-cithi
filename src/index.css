@@ -100,7 +100,16 @@ button:focus-visible {
 }
 
 h3 {
+  font-size: 25px;
   color: #ecf0f1;
+}
+
+.authbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -124,5 +133,9 @@ h3 {
     flex-direction: column;
     width: 100%;
     height: auto;
+  }
+
+  textarea {
+    width: auto;
   }
 }
