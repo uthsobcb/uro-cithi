@@ -15,9 +15,9 @@ const SendMessage = () => {
             await addDoc(collection(db, "messages"), {
                 text: message
             });
-            setMessage('Message Sent. Thanks for your kind words. Means a lot...');
+            setMessage('');
 
-            alert('Message sent successfully!');
+            alert('Message Sent. Thanks for your kind words. Means a lot...');
         } catch (error) {
             console.error('Error sending message:', error.message);
         }

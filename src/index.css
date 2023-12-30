@@ -95,21 +95,8 @@ button:focus-visible {
   transition: transform 0.3s ease-in-out;
 }
 
-.card-container:hover {
-  transform: scale(1.05);
-}
-
-h3 {
-  font-size: 25px;
-  color: #ecf0f1;
-}
-
-.authbox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
+.card-container h3 {
+  color: yellow;
 }
 
 @media (prefers-color-scheme: light) {
