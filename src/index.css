@@ -76,7 +76,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 .card-section {
   display: flex;
   flex-wrap: wrap;
@@ -95,25 +94,21 @@ button:focus-visible {
   transition: transform 0.3s ease-in-out;
 }
 
-.card-container h3 {
-  color: yellow;
+.card-container:hover {
+  transform: scale(1.05);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
+h3 {
+  color: #ecf0f1;
 }
 
+.authbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
 @media only screen and (max-width: 720px) {
   .card-section {
     display: flex;
