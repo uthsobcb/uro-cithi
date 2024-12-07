@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { supabase } from '../supabase';
 
 const SendMessage = () => {
     const [message, setMessage] = useState('');
@@ -12,11 +10,13 @@ const SendMessage = () => {
             return;
         }
         try {
-            await addDoc(collection(db, "messages"), {
-                text: message
-            });
-            setMessage('');
+            const { error } = await supabase
+                .from('messages')
+                .insert([{ text: message }]);
 
+            if (error) throw error;
+
+            setMessage('');
             alert('Message Sent. Thanks for your kind words. Means a lot...');
         } catch (error) {
             console.error('Error sending message:', error.message);
@@ -25,14 +25,24 @@ const SendMessage = () => {
 
     return (
         <div className="infoText">
-            <h1>Uro Chithi Bakso (উড়ো চিঠি বাক্স)📮 </h1>
+            <h1>Uro Chithi Bakso (উড়ো চিঠি বাক্স)📮</h1>
             <h2>Anonymous Letter Box</h2>
-            <p>Howdy, it's <span>@uthsob_cb</span>. This year, I did a bunch of stuff, met new people, made friends, and did some weird things. 😜  <br /> Met people in real life and more. Overall I've changed a lot . If we meet this year or talked with you or you found me then i'm looking for you 🕵🏽‍♂️. <br /> I'm curious about what you think. Could you share a message or some tips? or maybe  <span>constructive criticism</span> for me? <br /> All your data will be Anonymous. I won't know who the heck you are🥷. But your message will make my day. Thanks a Ton🚀</p>
-            <textarea name="chithibox" cols="50" rows="10" placeholder='Start Writing Chithi...' value={message}
+            <p>
+                Howdy, it's <span>@uthsob_cb</span>. It's time for <span>year ending survey</span> I’m looking to improve and grow! If we met or talked this year, I’d really appreciate your honest thoughts. <br />
+                Share any feedback, advice, or areas where you think I could do better.
+                <br />Your input means a lot and will help me improve!</p>
+
+            <span>Sender info will be Anonymous! So Please feel free to send what you wanted to tell me.</span>
+            <textarea
+                name="chithibox"
+                cols="50"
+                rows="10"
+                placeholder="Start Writing Chithi..."
+                value={message}
                 onChange={(e) => setMessage(e.target.value)}
             ></textarea>
             <button onClick={handleSendMessage}>Send</button>
-        </div>
+        </div >
     );
 }
 

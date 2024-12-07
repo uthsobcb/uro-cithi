@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { doc, getDocs, setDoc } from 'firebase/firestore';
-import { db } from '../firebase';
-import { collection, addDoc } from "firebase/firestore";
-
-
+import { supabase } from '../supabase';
 
 const ShowMessages = () => {
-    const [messages, setMessages] = useState([]);
-    const allMessage = collection(db, "messages");
+    const [val, setVal] = useState([]);
     const [password, setPassword] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
-    }
-
-    const [val, setVal] = useState([])
+    };
 
     const handleAuthenticate = () => {
         if (password === import.meta.env.VITE_PASSWORD) {
@@ -25,24 +18,36 @@ const ShowMessages = () => {
         }
     };
 
-
     useEffect(() => {
         if (authenticated) {
-            const getMessage = async () => {
-                const dbVal = await getDocs(allMessage)
-                setVal(dbVal.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-            }
-            getMessage()
+            const getMessages = async () => {
+                const { data, error } = await supabase
+                    .from('messages')
+                    .select('*');
+
+                if (error) {
+                    console.error('Error fetching messages:', error.message);
+                    return;
+                }
+
+                setVal(data);
+            };
+            getMessages();
         }
     }, [authenticated]);
 
     return (
         <>
             {!authenticated ? (
-                <div>
+                <div className="authbox">
                     <label>
                         Password:
-                        <input type="password" value={password} onChange={handlePasswordChange} />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            className="auth-input"
+                        />
                     </label>
                     <button onClick={handleAuthenticate}>Authenticate</button>
                 </div>
@@ -50,10 +55,10 @@ const ShowMessages = () => {
                 <div>
                     <h1>All Messages to Uthsob</h1>
                     <div className="card-section">
-                        {val.map((allMessage) => (
-                            <div key={allMessage.id} className="card-container">
+                        {val.map((message) => (
+                            <div key={message.id} className="card-container">
                                 <h3>@Anonymous</h3>
-                                <p>{allMessage.text}</p>
+                                <p>{message.text}</p>
                             </div>
                         ))}
                     </div>
